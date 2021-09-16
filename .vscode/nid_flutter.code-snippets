@@ -149,8 +149,8 @@
     ],
     "description": "JsonSerializable Class"
   },
-  "MobX: Store": {
-    "prefix": "xs",
+  "MobX: Store（Lite）": {
+    "prefix": "xsl",
     "body": [
       "import 'package:mobx/mobx.dart';",
       "",
@@ -161,6 +161,55 @@
       "abstract class _${2:Name} with Store {",
       "  ",
       "}"
+    ],
+    "description": "MobX: Store"
+  },
+  "MobX: Store": {
+    "prefix": "xs",
+    "body": [
+      "import 'package:mobx/mobx.dart';",
+      "part '${1}.g.dart';",
+      "",
+      "class ${2:StoreName} = _${2:StoreName} with _$${2:StoreName};",
+      "",
+      "abstract class _${2:StoreName} with Store {",
+      "  _${2:StoreName}() {",
+      "    // initReactions();",
+      "  }",
+      "",
+      "  // ————————————————————————————————————————————————————————",
+      "  // 属性",
+      "  // ————————————————————————————————————————————————————————",
+      "",
+      "  List<ReactionDisposer> reactionDisposers = [];",
+      "",
+      "  // ————————————————————————————————————————————————————————",
+      "  // 数据：Observable",
+      "  // ————————————————————————————————————————————————————————",
+      "",
+      "  // ————————————————————————————————————————————————————————",
+      "  // 计算：Computed",
+      "  // ————————————————————————————————————————————————————————",
+      "",
+      "  // ————————————————————————————————————————————————————————",
+      "  // 动作：Action",
+      "  // ————————————————————————————————————————————————————————",
+      "",
+      "  // ————————————————————————————————————————————————————————",
+      "  // 反应",
+      "  // ————————————————————————————————————————————————————————",
+      "",
+      "  // 初始反应",
+      "  initReactions() {",
+      "    // 用 autorun，reaction 或 when 方法添加反应",
+      "  }",
+      "",
+      "  // 取消反应",
+      "  disposeReactions() {",
+      "    reactionDisposers.forEach((disposer) => disposer());",
+      "  }",
+      "}",
+      ""
     ],
     "description": "MobX: Store"
   }
