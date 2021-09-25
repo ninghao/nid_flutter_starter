@@ -212,5 +212,68 @@
       ""
     ],
     "description": "MobX: Store"
+  },
+  "MobX: Observable": {
+    "prefix": "xo",
+    "body": ["@observable", "${1};", ""],
+    "description": "MobX: Observable"
+  },
+  "MobX: Action": {
+    "prefix": "xa",
+    "body": [
+      "@action",
+      "${1:actionName}(${2:DataType} data) {",
+      "  ${3:observable} = data;",
+      "}",
+      ""
+    ],
+    "description": "MobX: Action"
+  },
+  "MobX: Computed": {
+    "prefix": "xc",
+    "body": ["@computed", "${1};", ""],
+    "description": "MobX: Computed"
+  },
+  "MobX: Reaction": {
+    "prefix": "xr",
+    "body": [
+      "${1:reactionName}() {",
+      "  return reaction(",
+      "    (_) => ${2:observable},",
+      "    (_) {",
+      "      ${3:effect}",
+      "    },",
+      "  );",
+      "}",
+      ""
+    ],
+    "description": "MobX: Reaction"
+  },
+  "API Client Method": {
+    "prefix": "acm",
+    "body": [
+      "Future<${1:DataType}> ${2:methodName}(${3:params}) async {",
+      "  try {",
+      "    setLoading(true);",
+      "",
+      "    final uri = Uri.parse('${AppConfig.apiBaseUrl}/${4:API}');",
+      "    final response = await appService.apiHttpClient.${5:get}(uri);",
+      "    final responseBody = jsonDecode(response.body);",
+      "",
+      "    if (response.statusCode != ${6:200}) {",
+      "      throw HttpException();",
+      "    }",
+      "",
+      "    ${7:setData}(responseBody);",
+      "",
+      "    return responseBody;",
+      "  } catch (e) {",
+      "    throw HttpException();",
+      "  } finally {",
+      "    setLoading(false);",
+      "  }",
+      "}"
+    ],
+    "description": "API Client Method"
   }
 }
